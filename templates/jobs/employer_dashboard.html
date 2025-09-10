@@ -1,0 +1,31 @@
+{% extends 'jobs/base.html' %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<div class="jumbotron text-center py-5"
+style="background: url('https://img.freepik.com/free-vector/technology-banner-background-with-hexagonal-shapes-text-space_1017-22589.jpg?ga=GA1.1.363539920.1738163694&semt=ais_hybrid') no-repeat center center; background-size: cover; color: rgb(245, 119, 9); border-radius: 10px;">
+<h1 class="display-4 text-primary  " style="font-weight: 500;" >Employer Dashboard</h1>
+<h4>Welcome, {{ request.user.username }}!</h4>
+
+</div>
+
+<div class="container mt-5">
+    <ul  >
+<div class="card shadow-lg  " style="  display: flex;width: 100%;flex-direction: row;height: 10rem;justify-content: space-evenly; align-items: center;">
+
+   
+
+        <button class="btn btn-outline-primary shadow-lg   " style="  width: 15rem;height: 3.5rem;" ><li style="list-style: none;" ><a style="text-decoration: none;color: black;"  href="{% url 'post_job' %}">Post a New Job</a></li></button>
+
+
+        <button class="btn btn-outline-info shadow-lg text-white " style="  width: 15rem;height: 3.5rem;"><li style="list-style: none;" ><a style="text-decoration: none;color: black;"  href="{% url 'job_listings' %}">Manage Your Jobs</a></li></button>
+
+
+        <button class="btn btn-outline-danger  shadow-lg "style="width: 15rem;height: 3.5rem;" ><li style="list-style: none;" ><a style="text-decoration: none;color: black;"  href="{% url 'manage_applications' %}">View Applications</a></li></button>
+
+
+    </div>
+    </ul>
+</div>
+{% endblock %}

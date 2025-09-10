@@ -1,0 +1,29 @@
+{% extends 'jobs/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mt-4">My Job Listings</h2>
+    <a href="{% url 'post_job' %}" class="btn btn-primary mb-3">Post a New Job</a>
+
+    {% for job in jobs %}
+    <div  >
+
+        <div class="card mb-3" >
+            <div class="card-body">
+                <h5 class="card-title">{{ job.title }}</h5>
+                <h6 class="card-subtitle text-muted">{{ job.company_name }} - {{ job.location }}</h6>
+                <p class="card-text">{{ job.description|truncatewords:30 }}</p>
+                
+                <p><strong>Applications:</strong> {{ job.jobapplication_set.count }}</p>
+                
+                <a href="{% url 'edit_job' job.id %}" class="btn btn-warning">Edit</a>
+                <a href="{% url 'delete_job' job.id %}" class="btn btn-danger">Delete</a>
+                <a href="{% url 'manage_applications' %}" class="btn btn-info">View Applications</a>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>No jobs posted yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}

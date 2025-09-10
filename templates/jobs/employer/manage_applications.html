@@ -1,0 +1,50 @@
+{% extends 'jobs/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Manage Applications</h2>
+
+    {% if applications %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Candidate</th>
+                    <th>Job Title</th>
+                    <th>Status</th>
+                    <th>Resume</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for application in applications %}
+                <tr>
+                    <td>{{ application.user.username }}</td>
+                    <td>{{ application.job.title }}</td>
+                    <td><span class="badge bg-info">{{ application.status }}</span></td>
+                    <td>
+                        {% if application.resume %}
+                            <a href="{{ application.resume.url }}" target="_blank" class="btn btn-sm btn-primary">View Resume</a>
+                        {% else %}
+                            No resume
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'update_application_status' application.id 'Shortlisted' %}" class="btn btn-warning btn-sm">Shortlist</a>
+                        <a href="{% url 'update_application_status' application.id 'Interview Scheduled' %}" class="btn btn-info btn-sm">Schedule Interview</a>
+                        <a href="{% url 'update_application_status' application.id 'Rejected' %}" class="btn btn-danger btn-sm">Reject</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <div class="alert alert-warning text-center">
+            {% if request.user.job_set.exists %}
+                No applications found.
+            {% else %}
+                You haven't posted any jobs yet.
+            {% endif %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
